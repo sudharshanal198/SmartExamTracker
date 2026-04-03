@@ -6,7 +6,13 @@ require('dotenv').config();
 const app = express();
 
 // Middleware
-app.use(cors());
+const cors = require("cors");
+
+app.use(cors({
+  origin: "https://smart-exam-tracker.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 app.use(express.json({ extended: false }));
 app.use(express.urlencoded({ extended: true }));
 
