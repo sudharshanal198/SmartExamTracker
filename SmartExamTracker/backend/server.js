@@ -7,14 +7,16 @@ const app = express();
 // Middleware
 const cors = require("cors");
 
-app.use(cors({
-  origin: "https://smart-exam-tracker.vercel.app",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
-}));
-app.use(express.json({ extended: false }));
-app.use(express.urlencoded({ extended: true }));
-app.options("*", cors());
+app.use(
+  cors({
+    origin: "https://smart-exam-tracker.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+
+// ✅ FIXED
+app.options("/*", cors());
 
 // Database connection
 const connectDB = async () => {
