@@ -14,6 +14,7 @@ app.use(cors({
 }));
 app.use(express.json({ extended: false }));
 app.use(express.urlencoded({ extended: true }));
+app.options("*", cors());
 
 // Database connection
 const connectDB = async () => {
