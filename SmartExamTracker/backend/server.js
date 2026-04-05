@@ -14,7 +14,7 @@ app.use(
     credentials: true,
   })
 );
-
+app.use(express.json());
 
 // Database connection
 const connectDB = async () => {
