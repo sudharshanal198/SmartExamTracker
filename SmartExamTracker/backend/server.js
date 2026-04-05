@@ -15,8 +15,6 @@ app.use(
   })
 );
 
-// ✅ FIXED
-app.options("/*", cors());
 
 // Database connection
 const connectDB = async () => {
