@@ -2,6 +2,7 @@ export interface User {
   id: string;
   email: string;
   streak?: number;
+  role?: 'student' | 'admin';
 }
 
 export interface Topic {

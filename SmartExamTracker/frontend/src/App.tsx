@@ -3,6 +3,7 @@ import { AuthProvider } from './context/AuthContext';
 import { DataProvider } from './context/DataContext';
 
 import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedAdminRoute from './components/ProtectedAdminRoute';
 import Navbar from './components/Navbar';
 
 import Login from './pages/Login';
@@ -13,6 +14,7 @@ import Subjects from './pages/Subjects';
 // Placeholders for remaining pages
 import SubjectDetail from './pages/SubjectDetail';
 import Analytics from './pages/Analytics';
+import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
   return (
@@ -31,6 +33,10 @@ function App() {
                   <Route path="/subjects" element={<Subjects />} />
                   <Route path="/subjects/:id" element={<SubjectDetail />} />
                   <Route path="/analytics" element={<Analytics />} />
+                </Route>
+                
+                <Route element={<ProtectedAdminRoute />}>
+                  <Route path="/admin" element={<AdminDashboard />} />
                 </Route>
                 
                 <Route path="*" element={<Navigate to="/" replace />} />

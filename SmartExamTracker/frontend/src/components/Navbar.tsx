@@ -1,15 +1,11 @@
 import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { BookOpen, LogOut, LayoutDashboard, BarChart3, List } from 'lucide-react';
+import { BookOpen, LayoutDashboard, BarChart3, List, Users } from 'lucide-react';
+import ProfileDropdown from './ProfileDropdown';
 const Navbar: React.FC = () => {
-  const { isAuthenticated, logout } = useAuth();
-  const navigate = useNavigate();
+  const { isAuthenticated, user } = useAuth();
   const location = useLocation();
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-  };
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -52,16 +48,21 @@ const Navbar: React.FC = () => {
                 <BarChart3 className="h-4 w-4 mr-2" />
                 Analytics
               </Link>
+              {user?.role === 'admin' && (
+                <Link
+                  to="/admin"
+                  className={`${
+                    isActive('/admin') ? 'border-primary text-primary' : 'border-transparent text-primary/70 hover:text-primary'
+                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium uppercase tracking-wide`}
+                >
+                  <Users className="h-4 w-4 mr-2" />
+                  Admin
+                </Link>
+              )}
             </div>
           </div>
           <div className="flex items-center">
-            <button
-              onClick={handleLogout}
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-xl text-background bg-primary hover:bg-accent transition-colors shadow-sm"
-            >
-              <LogOut className="h-4 w-4 mr-2" />
-              Logout
-            </button>
+            <ProfileDropdown />
           </div>
         </div>
       </div>

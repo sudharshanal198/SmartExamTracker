@@ -7,6 +7,7 @@ import { BookOpen, Eye, EyeOff } from 'lucide-react';
 const Register: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState('student');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -25,7 +26,7 @@ const Register: React.FC = () => {
     setLoading(true);
 
     try {
-      await api.post('/auth/register', { email, password });
+      await api.post('/auth/register', { email, password, role });
       navigate('/login');
     } catch (err: any) {
       setError(err.response?.data?.message || 'Registration failed');
@@ -89,6 +90,18 @@ const Register: React.FC = () => {
                   )}
                 </button>
               </div>
+            </div>
+            
+            <div>
+              <label className="block text-sm font-bold text-primary mb-1 uppercase tracking-wide">Account Role</label>
+              <select
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                className="appearance-none relative block w-full px-5 py-3 border border-primary/20 bg-background text-primary rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+              >
+                <option value="student">Student</option>
+                <option value="admin">Admin</option>
+              </select>
             </div>
           </div>
 

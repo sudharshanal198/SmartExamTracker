@@ -1,22 +1,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
-
 const app = express();
-
-// Middleware
 const cors = require("cors");
-
 app.use(
   cors({
-    origin: "https://smart-exam-tracker.vercel.app",
+    origin: ["https://smart-exam-tracker.vercel.app", "http://localhost:5173"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
 app.use(express.json());
-
-// Database connection
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
@@ -26,13 +20,9 @@ const connectDB = async () => {
     process.exit(1);
   }
 };
-
 connectDB();
-
-// Routes
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/subjects', require('./routes/subjectRoutes'));
-
+app.use('/api/admin', require('./routes/adminRoutes'));
 const PORT = process.env.PORT || 5000;
-
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

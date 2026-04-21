@@ -96,7 +96,6 @@ exports.toggleTopic = async (req, res) => {
 
 exports.deleteTopic = async (req, res) => {
   try {
-    // expecting query params or body, let's use body for consistency
     const { subjectId, topicId } = req.body;
     
     let subject = await Subject.findById(subjectId);
@@ -109,7 +108,7 @@ exports.deleteTopic = async (req, res) => {
     subject.topics.pull({ _id: topicId });
     await subject.save();
     
-    res.json(subject); // Return updated subject
+    res.json(subject);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');

@@ -3,7 +3,6 @@ const router = express.Router();
 const auth = require('../middleware/authMiddleware');
 const subjectController = require('../controllers/subjectController');
 
-// All routes require auth
 router.use(auth);
 
 router.route('/')

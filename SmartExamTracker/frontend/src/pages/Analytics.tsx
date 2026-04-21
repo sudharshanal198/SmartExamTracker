@@ -18,7 +18,6 @@ const Analytics: React.FC = () => {
       </div>
     );
   }
-
   const chartData = subjects.map(s => {
     const ts = s.topics.length;
     const cs = s.topics.filter(t => t.isCompleted).length;
@@ -27,10 +26,7 @@ const Analytics: React.FC = () => {
       completion: ts === 0 ? 0 : Math.round((cs / ts) * 100)
     };
   });
-
-  // Generate Insights
   let insights = [];
-
   if (subjects.length === 0) {
     insights.push({
       type: 'info',
@@ -41,8 +37,6 @@ const Analytics: React.FC = () => {
   } else {
     const totalTopics = subjects.reduce((sum, s) => sum + s.topics.length, 0);
     const completedTopics = subjects.reduce((sum, s) => sum + s.topics.filter(t => t.isCompleted).length, 0);
-    
-    // 1. Overall Completion Insight
     if (totalTopics > 0) {
       const overallPercent = Math.round((completedTopics / totalTopics) * 100);
       if (overallPercent === 100) {
@@ -75,8 +69,6 @@ const Analytics: React.FC = () => {
         message: 'Your subjects don\'t have any topics yet. Add topics to get readiness calculations.'
       });
     }
-
-    // 2. High Priority Focus
     const highPrioritySubjects = subjects.filter(s => s.priority === 'High');
     highPrioritySubjects.forEach(subject => {
       const ts = subject.topics.length;
@@ -108,8 +100,6 @@ const Analytics: React.FC = () => {
         });
       }
     });
-
-    // 3. Upcoming Exams
     const upcoming = [...subjects]
       .filter(s => new Date(s.examDate) >= new Date())
       .sort((a, b) => new Date(a.examDate).getTime() - new Date(b.examDate).getTime())

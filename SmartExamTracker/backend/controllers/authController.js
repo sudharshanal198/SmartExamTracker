@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 exports.register = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, role } = req.body;
 
     let user;
     try {
@@ -20,7 +20,8 @@ exports.register = async (req, res) => {
 
     user = new User({
       email,
-      password
+      password,
+      role: role || 'student'
     });
 
     try {
@@ -78,7 +79,8 @@ exports.login = async (req, res) => {
 
     const payload = {
       user: {
-        id: user.id
+        id: user.id,
+        role: user.role
       }
     };
     jwt.sign(
@@ -87,7 +89,7 @@ exports.login = async (req, res) => {
       { expiresIn: '5d' },
       (err, token) => {
         if (err) throw err;
-        res.json({ token, user: { id: user.id, email: user.email, streak: user.streak, lastActiveDate: user.lastActiveDate } });
+        res.json({ token, user: { id: user.id, email: user.email, streak: user.streak, lastActiveDate: user.lastActiveDate, role: user.role } });
       }
     );
   } catch (err) {
