@@ -26,7 +26,7 @@ const Analytics: React.FC = () => {
       completion: ts === 0 ? 0 : Math.round((cs / ts) * 100)
     };
   });
-  let insights = [];
+  const insights = [];
   if (subjects.length === 0) {
     insights.push({
       type: 'info',

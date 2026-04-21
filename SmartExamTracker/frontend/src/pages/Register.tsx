@@ -28,8 +28,9 @@ const Register: React.FC = () => {
     try {
       await api.post('/auth/register', { email, password, role });
       navigate('/login');
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Registration failed');
+    } catch (err) {
+      const errorResponse = err as { response?: { data?: { message?: string } } };
+      setError(errorResponse.response?.data?.message || 'Registration failed');
     } finally {
       setLoading(false);
     }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { BookOpen, LayoutDashboard, BarChart3, List, Users } from 'lucide-react';
 import ProfileDropdown from './ProfileDropdown';
@@ -23,27 +23,24 @@ const Navbar: React.FC = () => {
             <div className="hidden sm:ml-10 sm:flex sm:space-x-8">
               <Link
                 to="/"
-                className={`${
-                  isActive('/') ? 'border-primary text-primary' : 'border-transparent text-primary/70 hover:text-primary'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium uppercase tracking-wide`}
+                className={`${isActive('/') ? 'border-primary text-primary' : 'border-transparent text-primary/70 hover:text-primary'
+                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium uppercase tracking-wide`}
               >
                 <LayoutDashboard className="h-4 w-4 mr-2" />
                 Dashboard
               </Link>
               <Link
                 to="/subjects"
-                className={`${
-                  isActive('/subjects') ? 'border-primary text-primary' : 'border-transparent text-primary/70 hover:text-primary'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium uppercase tracking-wide`}
+                className={`${isActive('/subjects') ? 'border-primary text-primary' : 'border-transparent text-primary/70 hover:text-primary'
+                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium uppercase tracking-wide`}
               >
                 <List className="h-4 w-4 mr-2" />
                 Subjects
               </Link>
               <Link
                 to="/analytics"
-                className={`${
-                  isActive('/analytics') ? 'border-primary text-primary' : 'border-transparent text-primary/70 hover:text-primary'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium uppercase tracking-wide`}
+                className={`${isActive('/analytics') ? 'border-primary text-primary' : 'border-transparent text-primary/70 hover:text-primary'
+                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium uppercase tracking-wide`}
               >
                 <BarChart3 className="h-4 w-4 mr-2" />
                 Analytics
@@ -51,9 +48,8 @@ const Navbar: React.FC = () => {
               {user?.role === 'admin' && (
                 <Link
                   to="/admin"
-                  className={`${
-                    isActive('/admin') ? 'border-primary text-primary' : 'border-transparent text-primary/70 hover:text-primary'
-                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium uppercase tracking-wide`}
+                  className={`${isActive('/admin') ? 'border-primary text-primary' : 'border-transparent text-primary/70 hover:text-primary'
+                    } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium uppercase tracking-wide`}
                 >
                   <Users className="h-4 w-4 mr-2" />
                   Admin

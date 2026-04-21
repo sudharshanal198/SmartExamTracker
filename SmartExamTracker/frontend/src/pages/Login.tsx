@@ -28,8 +28,9 @@ const Login: React.FC = () => {
       const res = await api.post('/auth/login', { email, password });
       login(res.data.token, res.data.user);
       navigate('/');
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to initialize login');
+    } catch (err) {
+      const errorResponse = err as { response?: { data?: { message?: string } } };
+      setError(errorResponse.response?.data?.message || 'Failed to initialize login');
     } finally {
       setLoading(false);
     }

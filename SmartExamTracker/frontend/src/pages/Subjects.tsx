@@ -79,7 +79,7 @@ const Subjects: React.FC = () => {
                 <select
                   className="w-full px-4 py-2 border border-primary/20 bg-background rounded-xl focus:outline-none focus:ring-2 focus:ring-primary"
                   value={formData.priority}
-                  onChange={e => setFormData({...formData, priority: e.target.value as any})}
+                  onChange={e => setFormData({...formData, priority: e.target.value as 'High' | 'Medium' | 'Low'})}
                 >
                   <option value="High">High</option>
                   <option value="Medium">Medium</option>
